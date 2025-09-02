@@ -32,7 +32,6 @@ public class TaskService {
 
     public List<TaskDto> getAllTasks() {
             List<Task> tasks = taskRepository.findAll();
-            //return  TaskMapper.maptoTaskDto(tasks).toList();
             return tasks.stream().map(TaskMapper::maptoTaskDto).toList();
 
     }
@@ -62,17 +61,16 @@ public class TaskService {
         Task task = taskRepository.findById(taskId).orElseThrow(() ->
                 new ResourceNotFoundException("Task is not exist:" + taskId));
                 taskRepository.deleteById(taskId);
-
     }
 
-    public TaskDto taskToEmployee(TaskToEmployeeDto taskToEmployeeDto) {
-        TaskDto appointedTaskDto=getTaskById(taskToEmployeeDto.getTaskId());
-        EmployeeDto appointedEmployeeDto=employeeService.getEmployeeById(taskToEmployeeDto.getEmployeeId());
-        Employee appointedEmployee=EmployeeMapper.mapToEmployee(appointedEmployeeDto);
-        Task appointedTask =TaskMapper.mapToTask(appointedTaskDto);
-        appointedTask.setEmployee(appointedEmployee);
-        appointedTask= taskRepository.save(appointedTask);
-        return TaskMapper.maptoTaskDto(appointedTask);
+    public TaskDto assignTask(TaskToEmployeeDto taskToEmployeeDto) {
+        TaskDto assignedTaskDto = getTaskById(taskToEmployeeDto.getTaskId());
+        EmployeeDto assignedEmployeeDto = employeeService.getEmployeeById(taskToEmployeeDto.getEmployeeId());
+        Employee assignedEmployee = EmployeeMapper.mapToEmployee(assignedEmployeeDto);
+        Task assignedTask = TaskMapper.mapToTask(assignedTaskDto);
+        assignedTask.setEmployee(assignedEmployee);
+        Task savedTask = taskRepository.save(assignedTask);
+        return TaskMapper.maptoTaskDto(savedTask);
     }
 
 }

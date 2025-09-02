@@ -45,7 +45,7 @@ public class TaskController {
     }
    @PutMapping("/appointed")
     public ResponseEntity<TaskDto>taskToEmployee(@RequestBody TaskToEmployeeDto taskToEmployeeDTO ){
-       TaskDto taskDto=taskService.taskToEmployee(taskToEmployeeDTO);
+       TaskDto taskDto=taskService.assignTask(taskToEmployeeDTO);
        return ResponseEntity.ok(taskDto);
    }
 
