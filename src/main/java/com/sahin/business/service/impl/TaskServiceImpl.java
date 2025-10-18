@@ -7,6 +7,7 @@ import com.sahin.business.exception.ResourceNotFoundException;
 import com.sahin.business.mapper.EmployeeMapper;
 import com.sahin.business.mapper.TaskMapper;
 import com.sahin.business.repository.TaskRepository;
+import com.sahin.business.service.EmployeeService;
 import com.sahin.business.service.TaskService;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,11 @@ import java.util.Optional;
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
-    private EmployeeServiceImpl employeeServiceImpl;
+    private EmployeeService employeeService;
 
-    public TaskServiceImpl(TaskRepository taskRepository, EmployeeServiceImpl employeeServiceImpl) {
+    public TaskServiceImpl(TaskRepository taskRepository, EmployeeService employeeService) {
         this.taskRepository = taskRepository;
-        this.employeeServiceImpl = employeeServiceImpl;
+        this.employeeService = employeeService;
     }
 
 
@@ -65,7 +66,7 @@ public class TaskServiceImpl implements TaskService {
 
     public TaskDto assignTask(TaskToEmployeeDto taskToEmployeeDto) {
         TaskDto assignedTaskDto = getTaskById(taskToEmployeeDto.getTaskId());
-        EmployeeDto assignedEmployeeDto = employeeServiceImpl.getEmployeeById(taskToEmployeeDto.getEmployeeId());
+        EmployeeDto assignedEmployeeDto = employeeService.getEmployeeById(taskToEmployeeDto.getEmployeeId());
         Employee assignedEmployee = EmployeeMapper.mapToEmployee(assignedEmployeeDto);
         Task assignedTask = TaskMapper.mapToTask(assignedTaskDto);
         assignedTask.setEmployee(assignedEmployee);

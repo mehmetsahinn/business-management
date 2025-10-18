@@ -1,8 +1,10 @@
 package com.sahin.business.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 @Entity
+@Builder
 @Table(name="Tasks")
 public class Task {
     @Id
