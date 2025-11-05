@@ -6,7 +6,11 @@ import jakarta.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name="Employees")
 public class Employee {
 
@@ -14,7 +18,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "employeeName_db")
+    @Column(name = "userName_db")
     private String userName;
     @Column(name = "password_db")
     @NotBlank(message = "Password cannot be blank")
@@ -37,7 +41,6 @@ public class Employee {
         this.userName=employeeName;
         this.password=password;
         this.employeeRank=employeeRank;
-
     }
 
     public Employee() {

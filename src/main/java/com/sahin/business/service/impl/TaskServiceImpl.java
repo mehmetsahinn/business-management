@@ -58,20 +58,22 @@ public class TaskServiceImpl implements TaskService {
         return TaskMapper.maptoTaskDto(updatedTaskObj);
     }
 
+    @Override
     public void deleteTaskById(long taskId) {
-        Task task = taskRepository.findById(taskId).orElseThrow(() ->
-                new ResourceNotFoundException("Task is not exist:" + taskId));
-                taskRepository.deleteById(taskId);
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + taskId));
+        taskRepository.delete(task);
     }
 
     public TaskDto assignTask(TaskToEmployeeDto taskToEmployeeDto) {
-        TaskDto assignedTaskDto = getTaskById(taskToEmployeeDto.getTaskId());
-        EmployeeDto assignedEmployeeDto = employeeService.getEmployeeById(taskToEmployeeDto.getEmployeeId());
-        Employee assignedEmployee = EmployeeMapper.mapToEmployee(assignedEmployeeDto);
-        Task assignedTask = TaskMapper.mapToTask(assignedTaskDto);
-        assignedTask.setEmployee(assignedEmployee);
-        Task savedTask = taskRepository.save(assignedTask);
-        return TaskMapper.maptoTaskDto(savedTask);
+        Task task = taskRepository.findById(taskToEmployeeDto.getTaskId())
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + taskToEmployeeDto.getTaskId()));
+        EmployeeDto employeeDto=employeeService.getEmployeeById(taskToEmployeeDto.getEmployeeId());
+
+        task.setEmployee(EmployeeMapper.mapToEmployee(employeeDto));
+        taskRepository.save(task);
+        return TaskMapper.maptoTaskDto(task);
     }
+
 
 }
