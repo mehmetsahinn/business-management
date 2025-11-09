@@ -45,8 +45,7 @@ public class TaskServiceImplTest {
 
     private Task sampleTask1;
     private Task sampleTask2;
-    private Task sampleTask3;
-    private TaskDto taskDto;
+
 
     @BeforeEach
     void setUp() {
@@ -56,7 +55,7 @@ public class TaskServiceImplTest {
                 .description("Desc 1")
                 .build();
         sampleTask2 = Task.builder()
-                .id(2L)
+                .id(    2L)
                 .taskName("Task 2")
                 .description("Desc 2")
                 .build();
@@ -141,9 +140,10 @@ public class TaskServiceImplTest {
     @DisplayName("Should throw ResourceNotFoundException when task ID does not exist")
     void updateTaskById_WhenTaskDoesNotExist_ShouldThrowException() {
         when(taskRepository.findById(99L)).thenReturn(Optional.empty());
-        assertThrows(ResourceNotFoundException.class,
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class,
                 () -> taskService.updateTaskById(99L, maptoTaskDto(sampleTask1)));
 
+        assertEquals("Task is not exist: " + 99L, exception.getMessage());
         verify(taskRepository, times(1)).findById(99L);
         verify(taskRepository, never()).save(any(Task.class));
     }
@@ -199,6 +199,8 @@ public class TaskServiceImplTest {
     @DisplayName("Should throw ResourceNotFoundException when employee not found")
     void assignTask_WhenEmployeeNotFound_ShouldThrowException() {
         TaskToEmployeeDto taskToEmployeeDto = new TaskToEmployeeDto();
+        taskToEmployeeDto.setTaskId(1L);
+        taskToEmployeeDto.setEmployeeId(1L);
         when(taskRepository.findById(1L)).thenReturn(Optional.of(sampleTask1));
         when(employeeService.getEmployeeById(1L))
                 .thenThrow(new ResourceNotFoundException("Employee not found with id: 1"));

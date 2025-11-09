@@ -26,6 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return EmployeeMapper.maptoEmployeeDto(employeeRepository.save(employee));
     }
 
+
     public List<EmployeeDto> getAllEmployee() {
             List<Employee> employees=employeeRepository.findAll();
             return employees.stream().map(EmployeeMapper::maptoEmployeeDto).toList();
