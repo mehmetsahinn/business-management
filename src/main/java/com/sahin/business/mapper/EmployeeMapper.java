@@ -1,7 +1,7 @@
 package com.sahin.business.mapper;
 
 import com.sahin.business.dto.EmployeeDto;
-import com.sahin.business.entity.Employee;
+import com.sahin.business.entities.Employee;
 
 public class EmployeeMapper {
 

@@ -1,4 +1,4 @@
-package com.sahin.business.entity;
+package com.sahin.business.entities;
 
 
 public enum EmployeeRank{

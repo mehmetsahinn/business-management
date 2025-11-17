@@ -1,7 +1,7 @@
 package com.sahin.business.controller;
 
 import com.sahin.business.dto.EmployeeDto;
-import com.sahin.business.service.impl.EmployeeServiceImpl;
+import com.sahin.business.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,34 +12,34 @@ import java.util.List;
 @RequestMapping("/v1/employee")
 
 public class EmployeeController {
-    private final EmployeeServiceImpl employeeServiceImpl;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeServiceImpl employeeServiceImpl) {
-        this.employeeServiceImpl = employeeServiceImpl;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @PostMapping
     public ResponseEntity<EmployeeDto>createEmployee(@RequestBody EmployeeDto employeeDto){
-        return new ResponseEntity<>(employeeServiceImpl.createEmployee(employeeDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(employeeService.createEmployee(employeeDto), HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<EmployeeDto>>getAllEmployee(){
-        List<EmployeeDto> employees= employeeServiceImpl.getAllEmployee();
+        List<EmployeeDto> employees= employeeService.getAllEmployee();
                 return ResponseEntity.ok(employees);
     }
     @GetMapping("{id}")
     public ResponseEntity<EmployeeDto>getEmployeeById(@PathVariable("id")long employeeId){
-        EmployeeDto employee= employeeServiceImpl.getEmployeeById(employeeId);
+        EmployeeDto employee= employeeService.getEmployeeById(employeeId);
         return ResponseEntity.ok(employee);
     }
     @PutMapping("{id}")
     public ResponseEntity<EmployeeDto>updateEmployeeById(@PathVariable("id")long employeeId,@RequestBody EmployeeDto updatedEmployee){
-        EmployeeDto employee= employeeServiceImpl.updateEmployeeById(employeeId,updatedEmployee);
+        EmployeeDto employee= employeeService.updateEmployeeById(employeeId,updatedEmployee);
         return ResponseEntity.ok(employee);
     }
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteEmployeeById(@PathVariable("id")long employeeId){
-        employeeServiceImpl.deleteEmployeeById(employeeId);
+        employeeService.deleteEmployeeById(employeeId);
         return ResponseEntity.ok("Employee deleted successfully");
     }
 

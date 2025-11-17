@@ -1,4 +1,4 @@
-package com.sahin.business.entity;
+package com.sahin.business.entities;
 
 import jakarta.persistence.*;
 import lombok.Builder;

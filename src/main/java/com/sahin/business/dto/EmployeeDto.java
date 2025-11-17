@@ -1,7 +1,7 @@
 package com.sahin.business.dto;
 
 
-import com.sahin.business.entity.EmployeeRank;
+import com.sahin.business.entities.EmployeeRank;
 
 public class EmployeeDto {
 

@@ -1,17 +1,14 @@
 package com.sahin.business.service;
 
-import com.sahin.business.dto.EmployeeDto;
 import com.sahin.business.dto.TaskDto;
 import com.sahin.business.dto.TaskToEmployeeDto;
-import com.sahin.business.entity.Employee;
-import com.sahin.business.entity.Statuses;
-import com.sahin.business.entity.Task;
+import com.sahin.business.entities.Employee;
+import com.sahin.business.entities.Statuses;
+import com.sahin.business.entities.Task;
 import com.sahin.business.exception.ResourceNotFoundException;
 import com.sahin.business.mapper.EmployeeMapper;
-import com.sahin.business.mapper.TaskMapper;
 import com.sahin.business.repository.TaskRepository;
 import com.sahin.business.service.impl.TaskServiceImpl;
-import com.sahin.business.dto.TaskToEmployeeDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.sahin.business.mapper.TaskMapper.maptoTaskDto;
-import static com.sahin.business.mapper.EmployeeMapper.maptoEmployeeDto;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 

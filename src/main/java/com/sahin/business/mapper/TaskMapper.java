@@ -1,7 +1,7 @@
 package com.sahin.business.mapper;
 
 import com.sahin.business.dto.TaskDto;
-import com.sahin.business.entity.Task;
+import com.sahin.business.entities.Task;
 
 public class TaskMapper {
     public static TaskDto maptoTaskDto(Task task){

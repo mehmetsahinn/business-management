@@ -3,6 +3,7 @@ package com.sahin.business.controller;
 import com.sahin.business.dto.*;
 import com.sahin.business.dto.TaskToEmployeeDto;
 import com.sahin.business.exception.ResourceNotFoundException;
+import com.sahin.business.service.TaskService;
 import com.sahin.business.service.impl.TaskServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,39 +14,39 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/task")
 public class TaskController {
-    private final TaskServiceImpl taskServiceImpl;
+    private final TaskService taskService;
 
-    public TaskController(TaskServiceImpl taskServiceImpl) {
-        this.taskServiceImpl = taskServiceImpl;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @PostMapping
     public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto){
-        return new ResponseEntity<>(taskServiceImpl.createTask(taskDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(taskService.createTask(taskDto), HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<TaskDto>>getAllTasks(){
-        List <TaskDto> tasks= taskServiceImpl.getAllTasks();
+        List <TaskDto> tasks= taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
     }
     @GetMapping("{id}")
     public ResponseEntity<TaskDto>getTaskById(@PathVariable("id")long taskId){
-        TaskDto taskDto= taskServiceImpl.getTaskById(taskId);
+        TaskDto taskDto= taskService.getTaskById(taskId);
         return ResponseEntity.ok(taskDto);
     }
     @PutMapping("{id}")
     public ResponseEntity<TaskDto>UpdateTaskById(@PathVariable("id")long taskId,@RequestBody TaskDto updatedTask){
-        TaskDto taskDto= taskServiceImpl.updateTaskById(taskId, updatedTask);
+        TaskDto taskDto= taskService.updateTaskById(taskId, updatedTask);
         return ResponseEntity.ok(taskDto);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTaskById(@PathVariable("id") long taskId) {
-        taskServiceImpl.deleteTaskById(taskId);
+        taskService.deleteTaskById(taskId);
         return ResponseEntity.noContent().build();
     }
    @PutMapping("/appointed")
     public ResponseEntity<TaskDto>taskToEmployee(@RequestBody TaskToEmployeeDto taskToEmployeeDTO ){
-       TaskDto taskDto= taskServiceImpl.assignTask(taskToEmployeeDTO);
+       TaskDto taskDto= taskService.assignTask(taskToEmployeeDTO);
        return ResponseEntity.ok(taskDto);
    }
 

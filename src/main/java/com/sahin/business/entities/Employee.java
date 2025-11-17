@@ -1,10 +1,9 @@
-package com.sahin.business.entity;
+package com.sahin.business.entities;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

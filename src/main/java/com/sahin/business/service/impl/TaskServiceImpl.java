@@ -1,8 +1,7 @@
 package com.sahin.business.service.impl;
 
 import com.sahin.business.dto.*;
-import com.sahin.business.entity.Employee;
-import com.sahin.business.entity.Task;
+import com.sahin.business.entities.Task;
 import com.sahin.business.exception.ResourceNotFoundException;
 import com.sahin.business.mapper.EmployeeMapper;
 import com.sahin.business.mapper.TaskMapper;
@@ -24,12 +23,10 @@ public class TaskServiceImpl implements TaskService {
         this.employeeService = employeeService;
     }
 
-
     public TaskDto createTask(TaskDto taskDto) {
             Task task = TaskMapper.mapToTask(taskDto);
             return TaskMapper.maptoTaskDto(taskRepository.save(task));
     }
-
 
     public List<TaskDto> getAllTasks() {
             List<Task> tasks = taskRepository.findAll();
@@ -74,6 +71,5 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
         return TaskMapper.maptoTaskDto(task);
     }
-
 
 }
