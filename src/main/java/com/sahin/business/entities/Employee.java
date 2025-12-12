@@ -17,9 +17,9 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "userName_db")
+    @Column(name = "userName_db", unique = true, nullable = false)
     private String userName;
-    @Column(name = "password_db")
+    @Column(name = "password_db", nullable = false)
     @NotBlank(message = "Password cannot be blank")
     private String password;
     @Column(name = "Employee_Rank_db")
