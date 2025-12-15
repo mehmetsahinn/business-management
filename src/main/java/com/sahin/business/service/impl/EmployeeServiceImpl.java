@@ -6,6 +6,7 @@ import com.sahin.business.exception.ResourceNotFoundException;
 import com.sahin.business.mapper.EmployeeMapper;
 import com.sahin.business.repository.EmployeeRepository;
 import com.sahin.business.service.EmployeeService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +15,20 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, BCryptPasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
-
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
-            Employee employee= EmployeeMapper.mapToEmployee(employeeDto);
+        if (employeeRepository.existsByUserName(employeeDto.getUserName())) {
+            throw new RuntimeException("Username already exist");
+        }
+        Employee employee= EmployeeMapper.mapToEmployee(employeeDto);
+        employee.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
             return EmployeeMapper.maptoEmployeeDto(employeeRepository.save(employee));
     }
 

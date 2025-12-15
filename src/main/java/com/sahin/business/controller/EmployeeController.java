@@ -2,6 +2,7 @@ package com.sahin.business.controller;
 
 import com.sahin.business.dto.EmployeeDto;
 import com.sahin.business.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDto>createEmployee(@RequestBody EmployeeDto employeeDto){
+    public ResponseEntity<EmployeeDto>createEmployee(@Valid @RequestBody EmployeeDto employeeDto){
         return new ResponseEntity<>(employeeService.createEmployee(employeeDto), HttpStatus.CREATED);
     }
     @GetMapping
