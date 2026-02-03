@@ -1,6 +1,6 @@
 package com.sahin.business.entities;
 
 
-public enum EmployeeRank{
+public enum Role {
     EMPLOYEE,ADMIN;
 }

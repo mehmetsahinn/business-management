@@ -1,4 +1,4 @@
-package com.sahin.business;
+package com.sahin.business.starter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

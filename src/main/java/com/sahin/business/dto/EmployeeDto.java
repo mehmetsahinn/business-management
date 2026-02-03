@@ -1,7 +1,7 @@
 package com.sahin.business.dto;
 
 
-import com.sahin.business.entities.EmployeeRank;
+import com.sahin.business.entities.Role;
 
 public class EmployeeDto {
 
@@ -9,9 +9,9 @@ public class EmployeeDto {
     private long id;
     private String userName;
     private String password;
-    private EmployeeRank employeeRank;
+    private Role employeeRank;
 
-    public EmployeeDto(long id, String userName, String password, EmployeeRank employeeRank) {
+    public EmployeeDto(long id, String userName, String password, Role employeeRank) {
         this.id = id;
         this.userName = userName;
         this.password=password;
@@ -44,11 +44,11 @@ public class EmployeeDto {
         this.password = password;
     }
 
-    public EmployeeRank getEmployeeRank() {
+    public Role getEmployeeRank() {
         return employeeRank;
     }
 
-    public void setEmployeeRank(EmployeeRank employeeRank) {
+    public void setEmployeeRank(Role employeeRank) {
         this.employeeRank = employeeRank;
     }
 
