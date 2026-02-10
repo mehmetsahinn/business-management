@@ -1,7 +1,7 @@
 package com.sahin.business.dto;
 
-import com.sahin.business.entities.Employee;
-import com.sahin.business.entities.Statuses;
+import com.sahin.business.entity.Employee;
+import com.sahin.business.entity.Statuses;
 
 
 public class TaskDto {

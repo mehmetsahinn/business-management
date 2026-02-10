@@ -1,9 +1,10 @@
 package com.sahin.business.config;
 
-import com.sahin.business.entities.Employee;
+import com.sahin.business.entity.Employee;
 import com.sahin.business.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
+@Configuration
 public class AppConfig {
     @Autowired
     private EmployeeRepository employeeRepository;

@@ -1,4 +1,4 @@
-package com.sahin.business.entities;
+package com.sahin.business.entity;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;

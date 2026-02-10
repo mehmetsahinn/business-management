@@ -1,7 +1,7 @@
 package com.sahin.business.service.impl;
 
 import com.sahin.business.dto.EmployeeDto;
-import com.sahin.business.entities.Employee;
+import com.sahin.business.entity.Employee;
 import com.sahin.business.exception.ResourceNotFoundException;
 import com.sahin.business.mapper.EmployeeMapper;
 import com.sahin.business.repository.EmployeeRepository;

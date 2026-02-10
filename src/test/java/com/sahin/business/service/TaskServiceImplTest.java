@@ -2,9 +2,9 @@ package com.sahin.business.service;
 
 import com.sahin.business.dto.TaskDto;
 import com.sahin.business.dto.TaskToEmployeeDto;
-import com.sahin.business.entities.Employee;
-import com.sahin.business.entities.Statuses;
-import com.sahin.business.entities.Task;
+import com.sahin.business.entity.Employee;
+import com.sahin.business.entity.Statuses;
+import com.sahin.business.entity.Task;
 import com.sahin.business.exception.ResourceNotFoundException;
 import com.sahin.business.mapper.EmployeeMapper;
 import com.sahin.business.repository.TaskRepository;

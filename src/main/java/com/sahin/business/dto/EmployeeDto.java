@@ -1,7 +1,7 @@
 package com.sahin.business.dto;
 
 
-import com.sahin.business.entities.Role;
+import com.sahin.business.entity.Role;
 
 public class EmployeeDto {
 
