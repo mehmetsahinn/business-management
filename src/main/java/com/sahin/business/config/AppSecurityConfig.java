@@ -1,5 +1,6 @@
 package com.sahin.business.config;
 
+import com.sahin.business.security.AuthEntryPoint;
 import com.sahin.business.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class AppSecurityConfig {
     private AuthenticationProvider authenticationProvider;
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private AuthEntryPoint authEntryPoint;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,7 +39,11 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(AUTHENTICATE , REGISTER , REFRESH_TOKEN).permitAll()
                         .anyRequest().permitAll()
-                ).sessionManagement(session -> session
+                )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(authEntryPoint)
+                )
+                .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider)

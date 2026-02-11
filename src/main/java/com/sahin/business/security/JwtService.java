@@ -55,10 +55,10 @@ public class JwtService {
 
     public boolean isTokenExpired(String token) {
         Date expiredDate = exportToken(token, Claims::getExpiration);
-        return expiredDate.before(new Date());  // Düzeltildi!
+        return expiredDate.before(new Date());
     }
 
-    public SecretKey getKey() {  // Key yerine SecretKey
+    public SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
