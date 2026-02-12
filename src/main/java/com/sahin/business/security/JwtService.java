@@ -1,15 +1,15 @@
 package com.sahin.business.security;
 
+import com.sahin.business.entity.Employee;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +21,10 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claimsMap = new HashMap<>();
+        if (userDetails instanceof Employee) {
+            Employee employee = (Employee) userDetails;
+            claimsMap.put("role", employee.getRole().name());
+        }
 
         return Jwts.builder()
                 .subject(userDetails.getUsername())

@@ -10,7 +10,7 @@ public class EmployeeMapper {
                 employee.getId(),
                 employee.getUsername(),
                 employee.getPassword(),
-                employee.getEmployeeRank()
+                employee.getRole()
         );
     }
 

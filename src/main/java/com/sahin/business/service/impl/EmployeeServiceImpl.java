@@ -53,8 +53,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setPassword(
                     Optional.ofNullable(updatedEmployee.getPassword()).orElse(employee.getPassword())
             );
-            employee.setEmployeeRank(
-                    Optional.ofNullable(updatedEmployee.getEmployeeRank()).orElse(employee.getEmployeeRank())
+            employee.setRole(
+                    Optional.ofNullable(updatedEmployee.getEmployeeRank()).orElse(employee.getRole())
             );
             employeeRepository.save(employee);
             return EmployeeMapper.maptoEmployeeDto(employee);

@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class AppSecurityConfig {
     public static final String AUTHENTICATE = "/authenticate";
-    public static final String REGISTER = "/register";
+    public static final String LOGIN = "/login";
     public static final String REFRESH_TOKEN = "/refreshToken";
     @Autowired
     private AuthenticationProvider authenticationProvider;
@@ -34,8 +34,8 @@ public class AppSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(AUTHENTICATE , REGISTER , REFRESH_TOKEN).permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/v2/login").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(authEntryPoint)

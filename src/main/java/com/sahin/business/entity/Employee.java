@@ -27,11 +27,11 @@ public class Employee  implements UserDetails {
     @NotBlank(message = "Password cannot be blank")
     private String password;
     @Column(name = "Employee_Rank_db")
-    private Role employeeRank;
+    private Role role;
     @PrePersist
     public void setDefaultValues() {
-        if (employeeRank == null) {
-            employeeRank = Role.EMPLOYEE;
+        if (role == null) {
+            role = Role.EMPLOYEE;
         }
     }
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
@@ -39,11 +39,11 @@ public class Employee  implements UserDetails {
 
 
 
-    public Employee(long id, String employeeName, String password, Role employeeRank) {
+    public Employee(long id, String employeeName, String password, Role role) {
         this.id = id;
         this.userName=employeeName;
         this.password=password;
-        this.employeeRank=employeeRank;
+        this.role = role;
     }
 
     public Employee() {
@@ -77,11 +77,11 @@ public class Employee  implements UserDetails {
         this.password = password;
     }
 
-    public Role getEmployeeRank() {
-        return employeeRank;
+    public Role getRole() {
+        return role;
     }
 
-    public void setEmployeeRank(Role employeeRank) {
-        this.employeeRank = employeeRank;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
