@@ -51,7 +51,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 if (userDetails != null && !jwtService.isTokenExpired(token)) {
                     System.out.println("Token geçerli, authentication ayarlanıyor...");
 
-                    // 1. Adım: Token'dan role bilgisini çek
                     String role = (String) jwtService.getClaimsByKey(token, "role");
                     System.out.println("Token'dan çekilen role: " + role);
 
