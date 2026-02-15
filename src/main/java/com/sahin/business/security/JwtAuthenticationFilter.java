@@ -65,8 +65,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         authorities = (List<GrantedAuthority>) userDetails.getAuthorities();
                         System.out.println("Role token'da bulunamadı, UserDetails'dan alındı");
                     }
-
-                    // 3. Adım: Authentication nesnesini oluştururken authorities'i ekle
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             username,
                             null,
@@ -74,7 +72,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     );
 
                     authentication.setDetails(userDetails);
-
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
