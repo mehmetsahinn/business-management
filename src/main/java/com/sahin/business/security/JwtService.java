@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,10 @@ import java.util.Map;
 import java.util.function.Function;
 @Service
 public class JwtService {
-
-    public static final String SECRET_KEY = "5N+6yAw9UJlZGIE3ivXxkQlxnb9BauSkvcdSJ447DQE=";
+    @Value("${jwt.secret}")
+    private String secret;
+    @Value("${jwt.expiration}")
+    private int expiration;
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claimsMap = new HashMap<>();
@@ -30,7 +33,7 @@ public class JwtService {
                 .subject(userDetails.getUsername())
                 .claims(claimsMap)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 2))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getKey())
                 .compact();
     }
@@ -63,7 +66,7 @@ public class JwtService {
     }
 
     public SecretKey getKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

@@ -31,10 +31,10 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(AuthRequest request) {
         try {
             UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
+                    new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword());
             authenticationProvider.authenticate(auth);
 
-            Optional<Employee> optionalEmployee = employeeRepository.findByUserName(request.getUsername());
+            Optional<Employee> optionalEmployee = employeeRepository.findByUserName(request.getUserName());
             String accessToken = jwtService.generateToken(optionalEmployee.get());
 
             return new AuthResponse(accessToken);

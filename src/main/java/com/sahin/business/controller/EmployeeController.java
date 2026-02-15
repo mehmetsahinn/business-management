@@ -18,7 +18,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<EmployeeDto>createEmployee(@Valid @RequestBody EmployeeDto employeeDto){
         return new ResponseEntity<>(employeeService.createEmployee(employeeDto), HttpStatus.CREATED);
     }
@@ -37,7 +37,7 @@ public class EmployeeController {
         EmployeeDto employee= employeeService.updateEmployeeById(employeeId,updatedEmployee);
         return ResponseEntity.ok(employee);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteEmployeeById(@PathVariable("id")long employeeId){
         employeeService.deleteEmployeeById(employeeId);
         return ResponseEntity.ok("Employee deleted successfully");

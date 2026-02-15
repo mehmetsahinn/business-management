@@ -20,7 +20,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto){
         return new ResponseEntity<>(taskService.createTask(taskDto), HttpStatus.CREATED);
     }
@@ -29,7 +29,7 @@ public class TaskController {
         List <TaskDto> tasks= taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TaskDto>getTaskById(@PathVariable("id")long taskId){
         TaskDto taskDto= taskService.getTaskById(taskId);
         return ResponseEntity.ok(taskDto);
@@ -39,7 +39,7 @@ public class TaskController {
         TaskDto taskDto= taskService.updateTaskById(taskId, updatedTask);
         return ResponseEntity.ok(taskDto);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteTaskById(@PathVariable("id") long taskId) {
         taskService.deleteTaskById(taskId);
         return ResponseEntity.noContent().build();

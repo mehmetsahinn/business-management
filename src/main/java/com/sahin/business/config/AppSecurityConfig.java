@@ -6,6 +6,7 @@ import com.sahin.business.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,6 +36,10 @@ public class AppSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/v2/login").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/v2/task/delete/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/v2/task/create").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/v2/employee/delete/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/v2/employee/create").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
